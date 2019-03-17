@@ -4,17 +4,13 @@
 #
 Name     : R-Rmpfr
 Version  : 0.7.2
-Release  : 16
+Release  : 17
 URL      : https://cran.r-project.org/src/contrib/Rmpfr_0.7-2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/Rmpfr_0.7-2.tar.gz
 Summary  : R MPFR - Multiple Precision Floating-Point Reliable
 Group    : Development/Tools
 License  : GPL-2.0+
 Requires: R-Rmpfr-lib = %{version}-%{release}
-Requires: R-dfoptim
-Requires: R-gmp
-Requires: R-pracma
-Requires: R-sfsmisc
 BuildRequires : R-dfoptim
 BuildRequires : R-gmp
 BuildRequires : R-pracma
@@ -44,10 +40,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1548214920
+export SOURCE_DATE_EPOCH=1552866312
 
 %install
-export SOURCE_DATE_EPOCH=1548214920
+export SOURCE_DATE_EPOCH=1552866312
 rm -rf %{buildroot}
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -83,8 +79,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library Rmpfr|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  Rmpfr || :
 
 
 %files
@@ -123,10 +118,17 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/Rmpfr/help/paths.rds
 /usr/lib64/R/library/Rmpfr/html/00Index.html
 /usr/lib64/R/library/Rmpfr/html/R.css
-/usr/lib64/R/library/Rmpfr/libs/symbols.rds
+/usr/lib64/R/library/Rmpfr/tests/arith-ex.R
+/usr/lib64/R/library/Rmpfr/tests/binomial-etc.R
+/usr/lib64/R/library/Rmpfr/tests/bit-repr.R
+/usr/lib64/R/library/Rmpfr/tests/bit-repr.Rout.save
+/usr/lib64/R/library/Rmpfr/tests/create.R
+/usr/lib64/R/library/Rmpfr/tests/functionals.R
+/usr/lib64/R/library/Rmpfr/tests/lowlevel.R
+/usr/lib64/R/library/Rmpfr/tests/matrix-ex.R
+/usr/lib64/R/library/Rmpfr/tests/special-fun-ex.R
+/usr/lib64/R/library/Rmpfr/tests/tstHexBin.R
 
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/R/library/Rmpfr/libs/Rmpfr.so
-/usr/lib64/R/library/Rmpfr/libs/Rmpfr.so.avx2
-/usr/lib64/R/library/Rmpfr/libs/Rmpfr.so.avx512
