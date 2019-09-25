@@ -4,15 +4,21 @@
 #
 Name     : R-Rmpfr
 Version  : 0.7.2
-Release  : 25
+Release  : 26
 URL      : https://cran.r-project.org/src/contrib/Rmpfr_0.7-2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/Rmpfr_0.7-2.tar.gz
 Summary  : R MPFR - Multiple Precision Floating-Point Reliable
 Group    : Development/Tools
 License  : GPL-2.0+
 Requires: R-Rmpfr-lib = %{version}-%{release}
+Requires: R-dfoptim
+Requires: R-gmp
+Requires: R-polynom
+Requires: R-pracma
+Requires: R-sfsmisc
 BuildRequires : R-dfoptim
 BuildRequires : R-gmp
+BuildRequires : R-polynom
 BuildRequires : R-pracma
 BuildRequires : R-sfsmisc
 BuildRequires : buildreq-R
@@ -20,9 +26,10 @@ BuildRequires : gmp-dev
 BuildRequires : mpfr-dev
 
 %description
-# Installation and Reference of the R package 'Rmpfr'
-Installation is non-trivial if you install from __source_ because of the
-`SystemRequirements` (listed in `./DESCRIPTION`):
+arbitrary precision floating point numbers, including transcendental
+  ("special") functions.  To this end, the package interfaces to
+  the 'LGPL' licensed 'MPFR' (Multiple Precision Floating-Point Reliable) Library
+  which itself is based on the 'GMP' (GNU Multiple Precision) Library.
 
 %package lib
 Summary: lib components for the R-Rmpfr package.
@@ -39,13 +46,13 @@ lib components for the R-Rmpfr package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1552962265
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1569372244
 
 %install
-export SOURCE_DATE_EPOCH=1552962265
+export SOURCE_DATE_EPOCH=1569372244
 rm -rf %{buildroot}
-export LANG=C
+export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -74,12 +81,12 @@ R CMD INSTALL --preclean --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} 
 cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 %{__rm} -rf %{buildroot}%{_datadir}/R/library/R.css
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc  Rmpfr || :
+R CMD check --no-manual --no-examples --no-codoc Rmpfr || :
 
 
 %files
