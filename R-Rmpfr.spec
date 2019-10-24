@@ -4,18 +4,14 @@
 #
 Name     : R-Rmpfr
 Version  : 0.7.2
-Release  : 26
+Release  : 27
 URL      : https://cran.r-project.org/src/contrib/Rmpfr_0.7-2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/Rmpfr_0.7-2.tar.gz
 Summary  : R MPFR - Multiple Precision Floating-Point Reliable
 Group    : Development/Tools
 License  : GPL-2.0+
 Requires: R-Rmpfr-lib = %{version}-%{release}
-Requires: R-dfoptim
 Requires: R-gmp
-Requires: R-polynom
-Requires: R-pracma
-Requires: R-sfsmisc
 BuildRequires : R-dfoptim
 BuildRequires : R-gmp
 BuildRequires : R-polynom
@@ -24,12 +20,12 @@ BuildRequires : R-sfsmisc
 BuildRequires : buildreq-R
 BuildRequires : gmp-dev
 BuildRequires : mpfr-dev
+BuildRequires : util-linux
 
 %description
-arbitrary precision floating point numbers, including transcendental
-  ("special") functions.  To this end, the package interfaces to
-  the 'LGPL' licensed 'MPFR' (Multiple Precision Floating-Point Reliable) Library
-  which itself is based on the 'GMP' (GNU Multiple Precision) Library.
+# Installation and Reference of the R package 'Rmpfr'
+Installation is non-trivial if you install from __source_ because of the
+`SystemRequirements` (listed in `./DESCRIPTION`):
 
 %package lib
 Summary: lib components for the R-Rmpfr package.
@@ -47,10 +43,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1569372244
+export SOURCE_DATE_EPOCH=1571892864
 
 %install
-export SOURCE_DATE_EPOCH=1569372244
+export SOURCE_DATE_EPOCH=1571892864
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
