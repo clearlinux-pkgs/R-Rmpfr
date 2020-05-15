@@ -4,29 +4,26 @@
 #
 Name     : R-Rmpfr
 Version  : 0.8.1
-Release  : 31
+Release  : 32
 URL      : https://cran.r-project.org/src/contrib/Rmpfr_0.8-1.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/Rmpfr_0.8-1.tar.gz
 Summary  : R MPFR - Multiple Precision Floating-Point Reliable
 Group    : Development/Tools
 License  : GPL-2.0+
 Requires: R-Rmpfr-lib = %{version}-%{release}
-Requires: R-dfoptim
 Requires: R-gmp
-Requires: R-polynom
-Requires: R-pracma
-BuildRequires : R-dfoptim
+Requires: R-sfsmisc
 BuildRequires : R-gmp
-BuildRequires : R-polynom
-BuildRequires : R-pracma
+BuildRequires : R-sfsmisc
 BuildRequires : buildreq-R
 BuildRequires : gmp-dev
 BuildRequires : mpfr-dev
 
 %description
-# Installation and Reference of the R package 'Rmpfr'
-Installation is non-trivial if you install from __source_ because of the
-`SystemRequirements` (listed in `./DESCRIPTION`):
+arbitrary precision floating point numbers, including transcendental
+  ("special") functions.  To this end, the package interfaces to
+  the 'LGPL' licensed 'MPFR' (Multiple Precision Floating-Point Reliable) Library
+  which itself is based on the 'GMP' (GNU Multiple Precision) Library.
 
 %package lib
 Summary: lib components for the R-Rmpfr package.
@@ -38,21 +35,22 @@ lib components for the R-Rmpfr package.
 
 %prep
 %setup -q -c -n Rmpfr
+cd %{_builddir}/Rmpfr
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1579883504
+export SOURCE_DATE_EPOCH=1589575144
 
 %install
-export SOURCE_DATE_EPOCH=1579883504
+export SOURCE_DATE_EPOCH=1589575144
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
