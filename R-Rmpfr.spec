@@ -4,10 +4,10 @@
 # Using build pattern: R
 #
 Name     : R-Rmpfr
-Version  : 0.9.2
-Release  : 65
-URL      : https://cran.r-project.org/src/contrib/Rmpfr_0.9-2.tar.gz
-Source0  : https://cran.r-project.org/src/contrib/Rmpfr_0.9-2.tar.gz
+Version  : 0.9.3
+Release  : 66
+URL      : https://cran.r-project.org/src/contrib/Rmpfr_0.9-3.tar.gz
+Source0  : https://cran.r-project.org/src/contrib/Rmpfr_0.9-3.tar.gz
 Summary  : R MPFR - Multiple Precision Floating-Point Reliable
 Group    : Development/Tools
 License  : GPL-2.0+
@@ -35,16 +35,19 @@ lib components for the R-Rmpfr package.
 
 %prep
 %setup -q -n Rmpfr
+pushd ..
+cp -a Rmpfr buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682274560
+export SOURCE_DATE_EPOCH=1691523075
 
 %install
-export SOURCE_DATE_EPOCH=1682274560
+export SOURCE_DATE_EPOCH=1691523075
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -82,6 +85,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
 R CMD check --no-manual --no-examples --no-codoc . || :
 
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
