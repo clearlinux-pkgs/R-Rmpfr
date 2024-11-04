@@ -7,7 +7,7 @@
 #
 Name     : R-Rmpfr
 Version  : 0.9.5
-Release  : 70
+Release  : 71
 URL      : https://cran.r-project.org/src/contrib/Rmpfr_0.9-5.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/Rmpfr_0.9-5.tar.gz
 Summary  : R MPFR - Multiple Precision Floating-Point Reliable
